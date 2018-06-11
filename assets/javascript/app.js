@@ -28,6 +28,7 @@ for (var i = 0; i <= characterNames.length; i++){
 
     var buttonDiv = $("<div>");
     var buttons = $("<button>").text(characterNames[i]);
+    console.log(buttons);
 
     
 
@@ -35,12 +36,51 @@ for (var i = 0; i <= characterNames.length; i++){
 
 }
 
-/*$("button").on("click", function() {
-    var character = $(this).attr("data-character");
+var character = $(this).attr("button");
 
-    var queryUrl = "https://api.giphy.com/v1/gifs/search?q=" + character + "1DR7K9QuCUV2GxyoEqNw6ovh1OmJtds9"
 
-}*/
+$("button").on("click", function(e) {
 
-/*$("#questions").append("<input type='radio' name='question-" + i +
-"' value='" + questions[i].answers[j] + "' id='" + idNameStrng + "' class='answers'>" + questions[i].answers[j]); */
+    console.log(e);
+    
+    
+    
+       var queryUrl = "http://api.giphy.com/v1/gifs/search?q=" + e.target.innerText + "&api_key=1DR7K9QuCUV2GxyoEqNw6ovh1OmJtds9&limit=10";
+
+        console.log(characterNames[i]);
+        
+
+        console.log(queryUrl);
+
+        $.ajax({
+            url: queryUrl,
+            method: "GET"
+        }).then(function(response){
+
+        console.log(response);
+
+    
+        
+        var results = response.data;
+        console.log(results);
+
+        for (var j = 0; j < results.length; j++) {
+
+            var characterDiv = $("<div>");
+            
+            var p = $("<p>").text("Rating: " + results[j].rating);
+
+            var characterImage = $("<img>");
+
+            characterImage.attr("src", results[j].images.fixed_height.url);
+
+            $(characterDiv).append(p, characterImage);
+
+            $("#gifHolder").prepend(characterDiv);
+           
+        }
+    });
+} 
+        
+);
+
