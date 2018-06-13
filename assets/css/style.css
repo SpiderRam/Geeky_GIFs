@@ -14,10 +14,10 @@ body {
 }
 
 #headerText {
-    background-color: #008080;
-    color: #A9A9A9;
+    background-color: #6B8E23;
+    color: #DCDCDC;
     padding: 10px 50px;
-    margin: 300px 20% 10px 20%;
+    margin: 20px 20% 10px 20%;
     border: 2px solid black;
     justify-content: center;
     overflow: auto;
@@ -28,14 +28,14 @@ h1 {
     font-size: 25px;
     text-align: center;
     margin-bottom: 10px;
-    text-shadow: 2px 2px #696969;
+    text-shadow: 2px 2px #006622;
 }
 
 h2 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     text-align: center;
-    text-shadow: 2px 2px #696969;
+    text-shadow: 2px 2px #006622;
 }
 
 button, #userButton {

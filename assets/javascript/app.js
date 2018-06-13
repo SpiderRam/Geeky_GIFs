@@ -37,14 +37,19 @@ function nameButtons() {
 nameButtons();
 
 /*
-create on click using document and button class$(document)on(click, "allbuttons"function
-
-var state = $(this).attr('src", "data-state")
-if(state === "still")
- GOOGLE: data-state giphy api, data-animate giphy api, data-still giphy api
+$(".allButtons").on('click', function() {
+    var state = $(this).attr('src', 'data-state');
+    if (state === "still") {
+        var newState = $(this).attr("data-animate");
+        $(this).attr("src", newState);
+        $(this).attr("data-state", "animate");
+    } else {
+        var newState = $(this).attr("data-still");
+        $(this).attr("src", newState);
+        $(this).attr("data-state", "still");
+    }
+});
 */
-
-
 
 var character = $(this).attr("button");
 console.log("CHARACTER: "+ character);
