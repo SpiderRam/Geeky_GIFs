@@ -21,37 +21,48 @@ const characterNames = [
     "Inigo Montoya",
 ]
 
+function nameButtons() {
+
+    for (var i = 0; i <= characterNames.length; i++){
+        $("#buttonHolder").append(buttons);
+
+        var buttonDiv = $("<div>");
+        var buttons = $("<button>").attr("data-type", characterNames[i]).addClass("allButtons").text(characterNames[i]);
+
+        $(buttonDiv).append(buttons);
+
+    }
+};
+
+nameButtons();
+
+/*
+create on click using document and button class$(document)on(click, "allbuttons"function
+
+var state = $(this).attr('src", "data-state")
+if(state === "still")
+ GOOGLE: data-state giphy api, data-animate giphy api, data-still giphy api
+*/
 
 
-for (var i = 0; i <= characterNames.length; i++){
-    $("#buttonHolder").append(buttons);
-
-    var buttonDiv = $("<div>");
-    var buttons = $("<button>").text(characterNames[i]);
-    console.log(buttons);
-
-    
-
-    $(buttonDiv).append(buttons);
-
-}
 
 var character = $(this).attr("button");
+console.log("CHARACTER: "+ character);
 
+$(document).on('click', ".allButtons", function(){
+//$(".allButtons").on("click", function(e) {
+    //e.preventDefault()
 
-$("button").on("click", function(e) {
-
-    console.log(e);
+    //console.log(e);
+    console.log("BUTTON CLICKED")
+    var search = $(this).attr("data-type")
     
     
     
-       var queryUrl = "http://api.giphy.com/v1/gifs/search?q=" + e.target.innerText + "&api_key=1DR7K9QuCUV2GxyoEqNw6ovh1OmJtds9&limit=10";
+       var queryUrl = "http://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=1DR7K9QuCUV2GxyoEqNw6ovh1OmJtds9&limit=10";
+       console.log(queryUrl);
 
-        console.log(characterNames[i]);
-        
-
-        console.log(queryUrl);
-
+       
         $.ajax({
             url: queryUrl,
             method: "GET"
@@ -83,4 +94,14 @@ $("button").on("click", function(e) {
 } 
         
 );
+
+
+$("#userButton").on("click", function(e) {
+    e.preventDefault();
+    var newButton = $("#textBox").val();
+    characterNames.push(newButton);
+    console.log(newButton);
+    $("#buttonHolder").empty();
+    nameButtons();
+});
 
