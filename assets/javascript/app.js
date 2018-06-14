@@ -36,64 +36,55 @@ function nameButtons() {
 
 nameButtons();
 
-/*
-$(".allButtons").on('click', function() {
-    var state = $(this).attr('src', 'data-state');
+const clickEventHandler = function() {
+    var state = $(this).attr('data-state');
+
     if (state === "still") {
-        var newState = $(this).attr("data-animate");
-        $(this).attr("src", newState);
+        var newSrc = $(this).attr("data-animate");
+        $(this).attr("src", newSrc);
         $(this).attr("data-state", "animate");
     } else {
-        var newState = $(this).attr("data-still");
-        $(this).attr("src", newState);
+        var newSrc = $(this).attr("data-still");
+        $(this).attr("src", newSrc);
         $(this).attr("data-state", "still");
     }
-});
-*/
+};
 
-var character = $(this).attr("button");
-console.log("CHARACTER: "+ character);
 
-$(document).on('click', ".allButtons", function(){
-//$(".allButtons").on("click", function(e) {
-    //e.preventDefault()
 
-    //console.log(e);
+$(document).on('click', ".allButtons", function() {
     console.log("BUTTON CLICKED")
     var search = $(this).attr("data-type")
     
+    var queryUrl = "http://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=1DR7K9QuCUV2GxyoEqNw6ovh1OmJtds9&limit=10";
+    console.log(queryUrl);
     
-    
-       var queryUrl = "http://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=1DR7K9QuCUV2GxyoEqNw6ovh1OmJtds9&limit=10";
-       console.log(queryUrl);
-
-       
-        $.ajax({
-            url: queryUrl,
-            method: "GET"
-        }).then(function(response){
+    $.ajax({
+        url: queryUrl,
+        method: "GET"
+    }).then(function(response){
 
         console.log(response);
-
-    
         
         var results = response.data;
         console.log(results);
 
         for (var j = 0; j < results.length; j++) {
-
+            var result = results[j];
             var characterDiv = $("<div>");
-            
             var p = $("<p>").text("Rating: " + results[j].rating);
-
             var characterImage = $("<img>");
 
-            characterImage.attr("src", results[j].images.fixed_height.url);
+            characterImage.attr("src", result.images.fixed_height_still.url);
+            characterImage.attr("data-state", "still");
+            characterImage.attr("data-still", result.images.fixed_height_still.url);
+            characterImage.attr("data-animate", result.images.fixed_height.url);
+            
+            characterImage.on("click", clickEventHandler);
 
             $(characterDiv).append(p, characterImage);
-
             $("#gifHolder").prepend(characterDiv);
-           
+            
         }
     });
 } 
