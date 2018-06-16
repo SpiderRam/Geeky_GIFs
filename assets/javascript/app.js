@@ -56,7 +56,7 @@ $(document).on('click', ".allButtons", function() {
     console.log("BUTTON CLICKED")
     var search = $(this).attr("data-type")
     
-    var queryUrl = "http://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=1DR7K9QuCUV2GxyoEqNw6ovh1OmJtds9&limit=10";
+    var queryUrl = "https://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=1DR7K9QuCUV2GxyoEqNw6ovh1OmJtds9&limit=10";
     console.log(queryUrl);
     
     $.ajax({
